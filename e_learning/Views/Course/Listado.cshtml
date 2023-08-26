@@ -1,0 +1,130 @@
+﻿@model IEnumerable<e_learning.Models.Course>;
+@{
+    ViewData["Title"] = "Listado de cursos";
+}
+
+<div class="container text-center ">
+    <h2 class="text-white"><i class="bi bi-collection-play-fill mx-2 text-white"></i>Cursos</h2>
+    <hr class="border border-dark border-1 opacity-75">
+</div>
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="offset-12">
+            <div class="card border">
+                <div class="card-header bg-dark text-center">
+                    <h3 class="text-white"><strong>Lista de Cursos</strong></h3>
+                </div>
+                <div class="card-body ">
+                    <div class="table-responsive">
+                        @if (Model.Count() > 0)
+                        {
+                            <table class="table table-bordered text-center borde border-2 border-dark" id="tblCategorias" width="100%" cellpadding="0">
+                                <thead>
+                                    <tr>
+                                        <th>@Html.DisplayNameFor(m => m.Id)</th>
+                                        <th>@Html.DisplayNameFor(m => m.name)</th>
+                                        <th>@Html.DisplayNameFor(m => m.price)</th>
+                                        <th>@Html.DisplayNameFor(m => m.description)</th>
+                                        <th>@Html.DisplayNameFor(m => m.imgUrl)</th>
+                                        <th>@Html.DisplayNameFor(m => m.VideoUrl)</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(m => item.Id)</td>
+                                            <td>@Html.DisplayFor(m => item.name)</td>
+                                            <td>@Html.DisplayFor(m => item.price)</td>
+                                            <td>@Html.DisplayFor(m => item.description)</td>
+                                            <td>@Html.DisplayFor(m => item.imgUrl)</td>
+                                            <td>@Html.DisplayFor(m => item.VideoUrl)</td>
+                                            <td class="text-center ">
+                                                <button onclick="showPartial(this)" class=" ms-2 btn btn-outline-info open-modal" data-url="/Course/Details" data-id="@item.Id"><i class="bi bi-info-circle-fill mx-2"></i>Detalles</button>
+                                                <button onclick="showPartial(this)" class=" ms-2 btn btn-outline-danger open-modal" data-url="/Course/Delete" data-id="@item.Id"><i class="bi bi-trash3-fill mx-2"></i>Borrar</button>
+                                                <button onclick="showPartial(this)" class=" ms-2 btn btn-outline-success open-modal" data-url="/Course/Edit" data-id="@item.Id"><i class="bi bi-pencil-fill mx-2"></i>Editar</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <p>No hay registros</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="MyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="modalContentContainer">
+                    <!-- Aquí se cargará el contenido de las vistas parciales -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#tblCategorias').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        //Obtenemos la dirrecion del controlador que realizar la accion y el Id del modelo a tratar
+        function showPartial(triggerElement) {
+            var url = $(triggerElement).data("url");
+            var id = $(triggerElement).data("id");
+
+            // Concatenar el ID en la URL
+            url += "?id=" + id;
+            //realizamos una peticion get al controlador indicado en la ruta que se obtuvo del triggerElement
+            //function (data) En jQuery, las funciones de callback son funciones que se pasan como argumentos a métodos
+            // se ejecutan en ciertos eventos o cuando se completa una acción específica.
+            $.get(url, function (data) {
+                //La respuesta del peticon get es codigo html una vista
+                $("#modalContentContainer").html(data);
+
+                $("#MyModal").modal("show");//Mostramos el modal
+            });
+        }
+    </script>
+
+
+}

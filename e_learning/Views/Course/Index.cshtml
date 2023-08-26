@@ -1,0 +1,95 @@
+﻿@model IEnumerable<e_learning.Models.Course>;
+@using Microsoft.AspNetCore.Identity
+@using e_learning.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Lista de Course";
+}
+
+<div class="row m-3" style="width:107%;">
+    <div class="col-5">
+        <a asp-action="Create" asp-controller="Course" class="btn btn-outline-primary btn-lg"><i class="bi bi-plus"></i>Agregar Curso</a>
+    </div>
+    <div class="col-6  d-flex justify-content-end">
+        <a asp-action="Listado" asp-controller="Course" data- class=" ms-2 btn btn-outline-success open-modal btn-lg">Lista de cursos</a>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        @if (Model.Count() > 0)
+        {
+            @foreach (var course in Model)
+            {
+                <div class="col-md-4 mb-4 ">
+                    <div class="card bg-dark ">
+                        <img width="100px" height="200px" src="@course.imgUrl" class="card-img-top" alt="Course Image">
+                        <div class="card-body">
+                            <h5 class="card-title text-white">Curso:@course.name</h5>
+                            <p class="card-text text-white">Descripcion: @course.description</p>
+                            <p class="card-text text-white"><strong>Precio:</strong> $@course.price</p>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <button onclick="showPartial(this)" class=" ms-2 btn btn-outline-info open-modal" data-url="/Enrollment/Create" data-id="@course.Id">Inscribirse</button>
+
+                            }
+                            else
+                            {
+                                <a href="/Identity/Account/Register" class="btn btn-outline-success">Registrarse</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>No hay registros</p>
+
+        }
+    </div>
+<div class="modal fade" id="MyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="modalContentContainer">
+                    <!-- Aquí se cargará el contenido de las vistas parciales -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script>
+        //Obtenemos la dirrecion del controlador que realizar la accion y el Id del modelo a tratar
+        function showPartial(triggerElement) {
+            var url = $(triggerElement).data("url");
+            var id = $(triggerElement).data("id");
+
+            // Concatenar el ID en la URL
+            url += "?id=" + id;
+            //realizamos una peticion get al controlador indicado en la ruta que se obtuvo del triggerElement
+            //function (data) En jQuery, las funciones de callback son funciones que se pasan como argumentos a métodos
+            // se ejecutan en ciertos eventos o cuando se completa una acción específica.
+            $.get(url, function (data) {
+                //La respuesta del peticon get es codigo html una vista
+                $("#modalContentContainer").html(data);
+
+                $("#MyModal").modal("show");//Mostramos el modal
+            });
+        }
+    </script>
+}

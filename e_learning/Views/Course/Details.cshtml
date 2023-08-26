@@ -1,0 +1,60 @@
+﻿@model e_learning.Models.Course
+
+@{
+    ViewData["Title"] = "Details";
+}
+<h4>
+    Detalle del course
+</h4>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th class="">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <td class="">
+                    @Html.DisplayFor(model => model.Id)
+                </td>
+            </tr>
+            <tr>
+                <th class="">
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+                <td class="">
+                    @Html.DisplayFor(model => model.name)
+                </td>
+            </tr>
+            <tr>
+                <th class="">
+                    @Html.DisplayNameFor(model => model.description)
+                </th>
+                <td class="">
+                    @Html.DisplayFor(model => model.description)
+                </td>
+            </tr>
+            <tr>
+                <th class="">
+                    @Html.DisplayNameFor(model => model.price)
+                </th>
+                <td class="">
+                    @Html.DisplayFor(model => model.price)
+                </td>
+            </tr>
+            <tr>
+                <th class="">
+                    @Html.DisplayNameFor(model => model.imgUrl)
+                </th>
+                <td class="">
+                    @Html.DisplayFor(model => model.imgUrl)
+                </td>
+            </tr>
+            <tr>
+                <th class="">
+                    @Html.DisplayNameFor(model => model.VideoUrl)
+                </th>
+                <td class="">
+                    @Html.DisplayFor(model => model.VideoUrl)
+                </td>
+            </tr>
+        </tbody>
+    </table>

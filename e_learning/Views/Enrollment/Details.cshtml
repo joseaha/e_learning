@@ -1,0 +1,47 @@
+﻿@model e_learning.Models.Enrollment
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="text-center">
+    <h4> Details inscripcion</h4>
+    <hr />
+</div>
+<dl class="row">
+    <dt class="">
+        @Html.DisplayNameFor(model => model.EnrollmentDate)
+    </dt>
+    <dd class="">
+        @Html.DisplayFor(model => model.EnrollmentDate)
+    </dd>
+    <dt class="">
+        @Html.DisplayNameFor(model => model.User.Email)
+    </dt>
+    <dd class="">
+        @Html.DisplayFor(model => model.User.Email)
+    </dd>
+    <dt class="">
+        @Html.DisplayNameFor(model => model.Course )
+    </dt>
+    <dd class="">
+        @Html.DisplayFor(model => model.Course.name)
+    </dd>
+    <dt class="">
+        @Html.DisplayNameFor(model => model.User.FirstName)
+    </dt>
+    <dd class="">
+        @Html.DisplayFor(model => model.User.FirstName)
+    </dd>
+    <dt class="">
+        @Html.DisplayNameFor(model => model.User.LastName)
+    </dt>
+    <dd class="">
+        @Html.DisplayFor(model => model.User.LastName)
+    </dd>
+    <dt class="">
+        @Html.DisplayNameFor(model => model.Course.price)
+    </dt>
+    <dd class="">
+       $ @Html.DisplayFor(model => model.Course.price)
+    </dd>
+</dl>

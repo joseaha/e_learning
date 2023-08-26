@@ -1,0 +1,36 @@
+﻿﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/auth.css" rel="stylesheet"> <!-- Vincula el archivo CSS -->
+
+<div class="row justify-content-center ">
+    <div class="col-5 mt-5 " >
+        <div class="card login-logout-card bg-dark">
+            <div class="card-header ">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link text-white"  href="/Identity/Account/Login">
+                            Log In
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Identity/Account/Register">
+                            Registrarse
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body bg-transparent">
+                <div class="row justify-content-center">
+                    <div class="col-10 my-4">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @await RenderSectionAsync("Scripts", required: false)
+}
