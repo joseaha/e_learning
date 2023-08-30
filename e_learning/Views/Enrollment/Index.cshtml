@@ -8,7 +8,6 @@
     <h2 class="text-white"><i class="bi bi-stack mx-2 text-white"></i>Inscripciones</h2>
     <hr class="border border-dark border-1 opacity-75">
 </div>
-
 <div class="container">
     <div class="row mt-3">
         <div class="offset-12">
@@ -60,6 +59,7 @@
                                             <td class="text-center ">
                                                 <button onclick="showPartial(this)" class=" ms-2 btn btn-outline-info open-modal" data-url="/Enrollment/Details" data-id="@item.Id"><i class="bi bi-info-circle-fill mx-2"></i>Detalles</button>
                                                 <button onclick="showPartial(this)" class=" ms-2 btn btn-outline-danger open-modal" data-url="/Enrollment/Delete" data-id="@item.Id"><i class="bi bi-trash3-fill mx-2"></i>Borrar</button>
+                                                <a class="btn btn-outline-info" asp-action="ImprimirMatricula" asp-controller="Home" asp-route-id="@item.UserId">Imprimir pdf</a>
                                             </td>
                                         </tr>
                                     }

@@ -7,3 +7,44 @@
     <p class="text-white">Aprende, crece y alcanza tus metas académicas con nuestros cursos en línea.</p>
     <a asp-action="Index" asp-controller="Course" class="btn btn-outline-primary btn-lg">Explora nuestros cursos</a>
 </div>
+
+<div class="container text-center">
+    <h2 class="text-white"><i class="bi bi-stack mx-2 text-white"></i>Inscripciones</h2>
+    <hr class="border border-dark border-1 opacity-75">
+</div>
+<canvas id="barChart" width="400" height="200"></canvas>
+
+@section Scripts {
+    <script>
+        var ctx = document.getElementById('barChart').getContext('2d');
+
+        var labels = @Html.Raw(Json.Serialize(ViewBag.EnrollmentChartLabels));
+        var dataValues = @Html.Raw(Json.Serialize(ViewBag.EnrollmentChartData));
+
+        var barChartData = {
+            labels: labels,
+            datasets: [{
+                label: 'Matrículas por Curso',
+                data: dataValues,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        var barChartConfig = {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        var barChart = new Chart(ctx, barChartConfig);
+    </script>
+}
+

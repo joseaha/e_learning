@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using e_learning.Data;
 using e_learning.Areas.Identity.Data;
 
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("e_learningDbContextConnection") ?? throw new InvalidOperationException("Connection string 'e_learningDbContextConnection' not found.");
 
@@ -47,5 +48,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+IWebHostEnvironment env = app.Environment;
+Rotativa.AspNetCore.RotativaConfiguration.Setup(env.WebRootPath, "../Rotativa/Windows");
 
 app.Run();

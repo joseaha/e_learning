@@ -18,7 +18,7 @@ namespace e_learning.Controllers
         // GET: Enrollment
         public async Task<IActionResult> Index()
         {
-            var enrollments = await _context.Enrollments.Where(c=> c.estado == true)
+            var enrollments = await _context.Enrollments.Where(c => c.estado == true)
                 .Include(e => e.Course)
                 .Include(e => e.User)
                 .ToListAsync();
@@ -39,14 +39,14 @@ namespace e_learning.Controllers
         public async Task<IActionResult> Create(Enrollment enrollment)
         {
             enrollment.estado = true;
-                enrollment.EnrollmentDate = DateTime.Now;
+            enrollment.EnrollmentDate = DateTime.Now;
             if (!ModelState.IsValid)
             {
                 _context.Add(enrollment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-          
+
             return View(enrollment);
         }
         [HttpGet]
@@ -109,5 +109,8 @@ namespace e_learning.Controllers
         {
             return _context.Enrollments.Any(e => e.Id == id);
         }
+
+        
+     
     }
 }

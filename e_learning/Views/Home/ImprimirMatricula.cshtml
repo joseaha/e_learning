@@ -1,0 +1,158 @@
+﻿@model e_learning.Models.Enrollment;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Imprimir Matricula</title>
+    <style>
+        .contenedor {
+            width: 900px;
+            height: 842px;
+            margin: auto;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        p.title {
+            font-weight: bold;
+        }
+
+        p.title2 {
+            font-weight: bold;
+            color: #03A99F;
+            font-size: 20px;
+        }
+
+        p.text {
+            font-size: 15px;
+            font-weight: 100;
+            color: #858585;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .tbth {
+            text-align: left;
+        }
+
+        table.tbproductos {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            table.tbproductos thead tr th {
+                background-color: #03A99F;
+                padding: 10px;
+                font-size: 15px;
+                color: white;
+            }
+
+            table.tbproductos tbody tr td {
+                padding: 10px;
+                border-bottom: 1px solid #E8E8E8;
+            }
+
+        .item {
+            font-size: 15px;
+            font-weight: 100;
+            color: #757575;
+        }
+
+        .item-2 {
+            font-size: 15px;
+            font-weight: bold;
+            color: #757575;
+        }
+
+        .item-3 {
+            font-size: 15px;
+            font-weight: bold;
+            background-color: #03A99F;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <table style="width: 100%;">
+            <tr>
+                <td>
+                    <img src="~/imagenes/codigoestudiante.png" style="width: 250px;" />
+                </td>
+                <td style="text-align: right;">
+                    <table>
+                        <tr>
+                            <td>
+                                <p class="title2">NÚMERO MATRICULA</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>@Model.Id</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%;">
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <p class="title">CLIENTE</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="text">@Model.User.FirstName @Model.User.LastName</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+      
+        <table class="tbproductos">
+            <thead>
+                <tr>
+                    <th class="tbth">Nombre</th>
+                    <th class="tbth">Apellidos</th>
+                    <th class="tbth">Nombre Curso</th>
+                    <th class="tbth">$Precio</th>
+                    <th class="tbth">Fecha MATRICULA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.User.FirstName</td>
+                    <td>@Model.User.LastName</td>
+                    <td>@Model.Course.name</td>
+                    <td>$@Model.Course.price</td>
+                    <td>@Model.EnrollmentDate</td>
+                </tr>
+                <tr>
+                    <td colspan="3"></td>
+                    <td class="item-2">Sub Total</td>
+                    <td class="item-3">@Model.Course.price</td>
+                </tr>
+                <tr>
+                    <td colspan="3"></td>
+                    <td class="item-3">Total</td>
+                    <td class="item-3">$@Model.Course.price</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
