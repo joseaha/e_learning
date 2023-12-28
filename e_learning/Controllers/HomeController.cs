@@ -69,7 +69,6 @@ namespace e_learning.Controllers
 
             return new ViewAsPdf("ImprimirMatricula", enrollments)
             {
-                FileName = $"Matricula {enrollments.User.FirstName}.pdf",
                 PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
                 PageSize = Rotativa.AspNetCore.Options.Size.A4
             };

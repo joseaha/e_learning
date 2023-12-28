@@ -1,10 +1,13 @@
 ﻿using e_learning.Data;
 using e_learning.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace e_learning.Controllers
 {
+    [Authorize]
+
     public class UserController : Controller
     {
         private readonly e_learningDbContext _context;
@@ -16,7 +19,7 @@ namespace e_learning.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.Where(c=>c.estado==true).ToListAsync());
+            return View(await _context.Users.Where(c => c.estado == true).ToListAsync());
         }
         [HttpGet]
         public async Task<IActionResult> Delete(string id)

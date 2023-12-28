@@ -1,10 +1,13 @@
 ﻿using e_learning.Data;
 using e_learning.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 namespace e_learning.Controllers
 {
+    [Authorize]
+
     public class EnrollmentController : Controller
 
     {

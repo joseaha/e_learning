@@ -1,11 +1,13 @@
 ﻿using e_learning.Data;
 using e_learning.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace e_learning.Controllers
 {
+    [Authorize]
     public class CourseController : Controller
     {
         private readonly e_learningDbContext _context;
